@@ -3,4 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="contact_name">#BA3030</color>
+    <color name="contact_number">#07FA14</color>
+    <color name="background">#557571</color>
+    <color name="red_background">#FE7171</color>
 </resources>

@@ -24,4 +24,10 @@
         <item name="colorAccent">#557571</item>
     </style>
 
+    <style name="calenderView" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#FE7171</item>
+        <item name="colorPrimaryDark">#FE7171</item>
+        <item name="colorAccent">#FE7171</item>
+    </style>
 </resources>
