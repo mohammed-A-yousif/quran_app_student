@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ public class StudentReview extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_steudent_review, container, false);
         CardView cardView = rootView.findViewById(R.id.review_cardView);
+        Button addReviewTextButton = rootView.findViewById(R.id.add_review_textButton);
         final TextView yearTextView = rootView.findViewById(R.id.year_textView);
         CalendarView calendarView = rootView.findViewById(R.id.calenderView);
         SimpleDateFormat initial_sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -32,6 +34,13 @@ public class StudentReview extends Fragment {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String selectedDates = sdf.format(new Date(year - 1900, month, dayOfMonth));
                 yearTextView.setText(selectedDates);
+            }
+        });
+
+        addReviewTextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
         return rootView;
