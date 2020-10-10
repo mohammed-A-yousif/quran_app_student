@@ -1,11 +1,13 @@
 package com.example.quranappstudent;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,7 +42,30 @@ public class StudentReview extends Fragment {
         addReviewTextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final AlertDialog dialogBuilder = new AlertDialog.Builder(getActivity()).create();
+                LayoutInflater inflater = getActivity().getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.custom_dialog, null);
 
+                final EditText editText = (EditText) dialogView.findViewById(R.id.edt_comment);
+                Button button1 = (Button) dialogView.findViewById(R.id.buttonSubmit);
+                Button button2 = (Button) dialogView.findViewById(R.id.buttonCancel);
+
+                button2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogBuilder.dismiss();
+                    }
+                });
+                button1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // DO SOMETHINGS
+                        dialogBuilder.dismiss();
+                    }
+                });
+
+                dialogBuilder.setView(dialogView);
+                dialogBuilder.show();
             }
         });
         return rootView;
