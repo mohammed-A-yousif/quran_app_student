@@ -1,5 +1,6 @@
 package com.example.quranappstudent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentMission extends Fragment {
-    public StudentMission(){
-
+    public StudentMission() {
     }
+
     private MissionsAdapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -29,15 +31,27 @@ public class StudentMission extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         List<Contact> listItems = new ArrayList<>();
 
-        for (int i = 0; i <10; i++) {
+        for (int i = 0; i < 10; i++) {
             Contact listItem = new Contact("Mohammed Ahmed" + (i + 1), "0909041441", "9/26/2020");
             listItems.add(listItem);
         }
-        adapter = new MissionsAdapter(listItems, getActivity());
+        adapter = new MissionsAdapter(listItems);
         recyclerView.setAdapter(adapter);
 
+        adapter.setOnItemClickListener(new MissionsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent i = new Intent(getActivity(), CompleteMission.class);
+                startActivity(i);
+            }
+        });
 
         return rootView;
     }
 
+//    @Override
+//    public void onContactSelected(Contact contact) {
+//        Intent i = new Intent(getActivity(), CompleteMission.class);
+//        startActivity(i);
+//    }
 }
