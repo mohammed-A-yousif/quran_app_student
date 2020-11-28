@@ -88,7 +88,7 @@
                 android:layout_marginTop="60dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="30dp"
-                android:background="@drawable/rounded_button"
+                android:background="@drawable/round_corner"
                 android:clickable="true"
                 android:focusable="true"
                 android:text="اكمال المهمة"

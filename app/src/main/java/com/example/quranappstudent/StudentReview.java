@@ -46,7 +46,6 @@ public class StudentReview extends Fragment {
                 LayoutInflater inflater = getActivity().getLayoutInflater();
                 View dialogView = inflater.inflate(R.layout.custom_dialog, null);
 
-                final EditText editText = (EditText) dialogView.findViewById(R.id.edt_comment);
                 Button button1 = (Button) dialogView.findViewById(R.id.buttonSubmit);
                 Button button2 = (Button) dialogView.findViewById(R.id.buttonCancel);
 

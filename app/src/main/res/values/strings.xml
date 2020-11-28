@@ -17,6 +17,8 @@
     <string name="phone_number">رقم الهاتف</string>
     <string name="password">كلمة السر</string>
     <string name="enter">تسجيل الدخول</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="splash_text">مركز الإتقان لتحفيظ القرآن</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="student_missions">Student Missions</string>

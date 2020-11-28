@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#557571"
+    android:background="#FFFFFF"
     tools:context=".ControlStudent">
 
     <FrameLayout
@@ -24,9 +24,9 @@
         android:layout_marginEnd="1dp"
         android:layout_marginRight="1dp"
         android:layout_marginBottom="1dp"
-        android:background="@drawable/rounded_text"
-        app:itemIconTint="#FE7171"
-        app:itemTextColor="#557571"
+        android:background="@drawable/round_corner"
+        app:itemIconTint="#FFFFFF"
+        app:itemTextColor="#FFFFFF"
         app:menu="@menu/bottom_menu" />
 
 

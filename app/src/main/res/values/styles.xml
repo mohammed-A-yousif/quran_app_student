@@ -26,8 +26,8 @@
 
     <style name="calenderView" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#FE7171</item>
-        <item name="colorPrimaryDark">#FE7171</item>
-        <item name="colorAccent">#FE7171</item>
+        <item name="colorPrimary">#9771FE</item>
+        <item name="colorPrimaryDark">#9771FE</item>
+        <item name="colorAccent">#9771FE</item>
     </style>
 </resources>
