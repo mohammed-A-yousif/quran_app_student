@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:background="#D8D7D7">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/review_cardView"
