@@ -35,11 +35,11 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-//        if (SharedPrefManager.getInstance(this).isLoggedIn()) {
-//            finish();
-//            startActivity(new Intent(this, ControlStudent.class));
-//            return;
-//        }
+        if (SharedPrefManager.getInstance(this).isLoggedIn()) {
+            finish();
+            startActivity(new Intent(this, ControlStudent.class));
+            return;
+        }
 
         viewDialog = new ViewDialog(this);
 
@@ -51,9 +51,9 @@ public class Login extends AppCompatActivity {
         loginButton.setOnClickListener(v -> {
             PhoneNumber = phoneEditText.getText().toString();
             Password = passEditText.getText().toString();
-            startActivity(new Intent(this, ControlStudent.class));
+//            startActivity(new Intent(this, ControlStudent.class));
 
-//            Sigin(PhoneNumber, Password);
+            Sigin(PhoneNumber, Password);
 
         });
     }
@@ -62,9 +62,9 @@ public class Login extends AppCompatActivity {
         if (!validate()) {
             return;
         }
-        viewDialog.showDialog();
+//        viewDialog.showDialog();
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URLs.GetStudents + "?PhoneNumber=" + phoneNumber + "&Password=" + password, null,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URLs.Login + "?PhoneNumber=" + phoneNumber + "&Password=" + password, null,
                 (JSONObject response) -> {
                     try {
                         String name = response.getString("Name");
@@ -87,7 +87,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void onSiginFailed() {
-        viewDialog.hideDialog();
+//        viewDialog.hideDialog();
         Snackbar.make(findViewById(android.R.id.content), "Sign in Failed", Snackbar.LENGTH_LONG)
                 .setAction("Try Again", v -> {
                     Sigin(PhoneNumber, Password);
@@ -95,7 +95,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void onSiginSuccess() {
-        viewDialog.hideDialog();
+//        viewDialog.hideDialog();
         Snackbar.make(findViewById(android.R.id.content), "Sign in Successfully", Snackbar.LENGTH_LONG)
                 .show();
         startActivity(new Intent(this, ControlStudent.class));

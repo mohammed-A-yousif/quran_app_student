@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MissionsAdapter extends RecyclerView.Adapter<MissionsAdapter.ViewHolder> implements Filterable {
-    private List<Contact> listItems;
-    private List<Contact> listItemsFiltered;
+    private List<Task> listItems;
+    private List<Task> listItemsFiltered;
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
@@ -52,7 +52,7 @@ public class MissionsAdapter extends RecyclerView.Adapter<MissionsAdapter.ViewHo
         }
     }
 
-    public MissionsAdapter(List<Contact> listItems) {
+    public MissionsAdapter(List<Task> listItems) {
         this.listItems = listItems;
         listItemsFiltered = new ArrayList<>(listItems);
     }
@@ -66,10 +66,10 @@ public class MissionsAdapter extends RecyclerView.Adapter<MissionsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Contact listItem = listItems.get(position);
-        holder.textViewName.setText(listItem.getName());
-        holder.textViewPhone.setText(listItem.getPhone());
-        holder.textViewDate.setText(listItem.getDate());
+        Task listItem = listItems.get(position);
+        holder.textViewName.setText(listItem.getTaskName());
+        holder.textViewPhone.setText(listItem.getTaskDec());
+        holder.textViewDate.setText(listItem.getCreatedAt());
     }
 
     @Override
@@ -86,14 +86,14 @@ public class MissionsAdapter extends RecyclerView.Adapter<MissionsAdapter.ViewHo
     private Filter contactFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<Contact> filteredList = new ArrayList<>();
+            List<Task> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(listItemsFiltered);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
-                for (Contact item : listItemsFiltered) {
-                    if (item.getName().toLowerCase().contains(filterPattern) || item.getPhone().contains(filterPattern)) {
+                for (Task item : listItemsFiltered) {
+                    if (item.getTaskName().toLowerCase().contains(filterPattern) || item.getTaskDec().contains(filterPattern)) {
                         filteredList.add(item);
                     }
                 }
