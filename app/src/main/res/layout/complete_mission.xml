@@ -66,7 +66,7 @@
 
 
             <TextView
-                android:id="@+id/mission_editText"
+                android:id="@+id/task_dec_text"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginLeft="20dp"
@@ -80,7 +80,7 @@
 
 
             <Button
-                android:id="@+id/add_mission_button"
+                android:id="@+id/btn_change_task_status"
                 android:layout_width="308dp"
                 android:layout_height="53dp"
                 android:layout_gravity="center"

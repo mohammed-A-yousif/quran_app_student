@@ -9,7 +9,7 @@ public class URLs {
     public static String Login = BaseUrl + "student_login/";
 
     public static String GetTask = BaseUrl + "tasks_student/";
-    public static String GetStudents = BaseUrl + "students/";
+    public static String ChangeTaskStatus = BaseUrl + "edit_task/";
 
 
 

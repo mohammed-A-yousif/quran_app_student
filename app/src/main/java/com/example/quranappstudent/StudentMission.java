@@ -26,9 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentMission extends Fragment {
-    public StudentMission() {
-    }
+public class StudentMission extends Fragment implements MissionsAdapter.TaskAdapterListener {
 
     private MissionsAdapter adapter;
     int StudentId;
@@ -49,13 +47,13 @@ public class StudentMission extends Fragment {
         listItems = new ArrayList<>();
 
 
-        adapter = new MissionsAdapter(listItems);
+        adapter = new MissionsAdapter(getActivity(),listItems, this::onTaskSelected);
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(position -> {
-            Intent i = new Intent(getActivity(), CompleteMission.class);
-            startActivity(i);
-        });
+//        adapter.setOnItemClickListener(position -> {
+//            Intent i = new Intent(getActivity(), CompleteMission.class);
+//            startActivity(i);
+//        });
 
         GetTask();
 
@@ -100,9 +98,13 @@ public class StudentMission extends Fragment {
 
     }
 
-//    @Override
-//    public void onContactSelected(Contact contact) {
-//        Intent i = new Intent(getActivity(), CompleteMission.class);
-//        startActivity(i);
-//    }
+    @Override
+    public void onTaskSelected(Task task) {
+        Intent intent = new Intent(getActivity(), CompleteMission.class);
+        intent.putExtra("TaskId", task.getId());
+        intent.putExtra("TaskName", task.getTaskName());
+        intent.putExtra("TaskDec", task.getTaskDec());
+        startActivity(intent);
+
+    }
 }

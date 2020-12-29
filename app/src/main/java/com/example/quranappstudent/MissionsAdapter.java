@@ -17,51 +17,39 @@ import java.util.List;
 public class MissionsAdapter extends RecyclerView.Adapter<MissionsAdapter.ViewHolder> implements Filterable {
     private List<Task> listItems;
     private List<Task> listItemsFiltered;
-    private OnItemClickListener mListener;
-
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mListener = listener;
-    }
+    private TaskAdapterListener mListener;
+    private Context context;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewName;
         public TextView textViewPhone;
         public TextView textViewDate;
 
-        public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.mission_row_name_textView);
             textViewPhone = itemView.findViewById(R.id.mission_row_phone_textView);
             textViewDate = itemView.findViewById(R.id._mission_row_date_textView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
-                    }
-                }
+            itemView.setOnClickListener(view -> {
+                // send selected contact in callback
+                mListener.onTaskSelected(listItems.get(getAdapterPosition()));
             });
         }
     }
 
-    public MissionsAdapter(List<Task> listItems) {
+    public MissionsAdapter(Context context, List<Task> listItems, TaskAdapterListener mListener) {
+        this.context = context;
+        this.mListener = mListener;
         this.listItems = listItems;
-        listItemsFiltered = new ArrayList<>(listItems);
+        this.listItemsFiltered = listItemsFiltered;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_mission, parent, false);
-        return new ViewHolder(v, mListener);
+        return new ViewHolder(v);
     }
 
     @Override
@@ -112,4 +100,7 @@ public class MissionsAdapter extends RecyclerView.Adapter<MissionsAdapter.ViewHo
         }
     };
 
+    public interface TaskAdapterListener {
+        void onTaskSelected(Task task);
+    }
 }
