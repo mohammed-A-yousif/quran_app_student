@@ -1,4 +1,4 @@
-package com.example.quranappstudent;
+package com.example.quranappstudent.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.quranappstudent.InternetStatus;
+import com.example.quranappstudent.R;
+import com.example.quranappstudent.SharedPrefManager;
+import com.example.quranappstudent.URLs;
+import com.example.quranappstudent.ViewDialog;
 import com.example.quranappstudent.adapter.TaskAdapter;
 import com.example.quranappstudent.model.Task;
 import com.google.android.material.snackbar.Snackbar;

@@ -67,8 +67,9 @@ public class LoginActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URLs.Login + "?PhoneNumber=" + phoneNumber + "&Password=" + password, null,
                 (JSONObject response) -> {
                     try {
+//                        Log.d("res", response.toString());
                         String name = response.getString("Name");
-                        Admin admin = new Admin(response.getInt("IdAdmin"), response.getInt("UserType"), response.getString("Name"), response.getInt("IdTeacher") ,response.getString("PhoneNumber"));
+                        Admin admin = new Admin(response.getInt("IdStudent"), response.getInt("UserType"), response.getString("Name"), response.getInt("IdTeacher") ,response.getString("PhoneNumber"));
                         SharedPrefManager.getInstance(getApplicationContext()).adminLogin(admin);
                         onSiginSuccess();
 
