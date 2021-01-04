@@ -1,9 +1,11 @@
-package com.example.quranappstudent;
+package com.example.quranappstudent.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.example.quranappstudent.R;
 
 public class SplashScreen extends Activity {
     @Override
@@ -14,7 +16,7 @@ public class SplashScreen extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashScreen.this, Login.class);
+                Intent i = new Intent(SplashScreen.this, LoginActivity.class);
                 startActivity(i);
                 finish();
             }

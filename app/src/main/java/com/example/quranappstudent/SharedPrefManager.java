@@ -4,10 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.example.quranappstudent.activity.LoginActivity;
+import com.example.quranappstudent.model.Admin;
+
 public class SharedPrefManager {
 
     private static final String SHARED_PREF_NAME = "Admin";
     private static final String KEY_NAME = "keyname";
+    private static final String KEY_TEACHER = "keyteacher";
     private static final String KEY_PHONENUMBER = "keyphone";
     private static final String KEY_ID = "keyid";
     private static final String KEY_USERTYPE = "keyusertype";
@@ -32,6 +36,7 @@ public class SharedPrefManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(KEY_ID, admin.getId());
         editor.putString(KEY_NAME, admin.getName());
+        editor.putInt(KEY_TEACHER, admin.getIdTeacher());
         editor.putString(KEY_PHONENUMBER, admin.getPhoneNumber());
         editor.putInt(KEY_USERTYPE, admin.getUserType());
         editor.apply();
@@ -48,6 +53,7 @@ public class SharedPrefManager {
                 sharedPreferences.getInt(KEY_ID, -1),
                 sharedPreferences.getInt(KEY_USERTYPE, -1),
                 sharedPreferences.getString(KEY_NAME, null),
+                sharedPreferences.getInt(KEY_TEACHER, -1),
                 sharedPreferences.getString(KEY_PHONENUMBER, null)
         );
     }
@@ -57,6 +63,6 @@ public class SharedPrefManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-        mCtx.startActivity(new Intent(mCtx, Login.class));
+        mCtx.startActivity(new Intent(mCtx, LoginActivity.class));
     }
 }

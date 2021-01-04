@@ -17,6 +17,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.quranappstudent.adapter.TaskAdapter;
+import com.example.quranappstudent.model.Task;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
@@ -26,12 +28,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentMission extends Fragment implements MissionsAdapter.TaskAdapterListener {
+public class StudentTask extends Fragment {
 
-    private MissionsAdapter adapter;
+    private TaskAdapter adapter;
     int StudentId;
     List<Task> listItems ;
     private JSONArray jsonArray;
+    ViewDialog viewDialog;
 
     @Nullable
     @Override
@@ -46,22 +49,24 @@ public class StudentMission extends Fragment implements MissionsAdapter.TaskAdap
         StudentId = SharedPrefManager.getInstance(getActivity()).getAdmin().getId();
         listItems = new ArrayList<>();
 
+        viewDialog = new ViewDialog(getActivity());
 
-        adapter = new MissionsAdapter(getActivity(),listItems, this::onTaskSelected);
+        adapter = new TaskAdapter(listItems, getActivity());
         recyclerView.setAdapter(adapter);
 
-//        adapter.setOnItemClickListener(position -> {
-//            Intent i = new Intent(getActivity(), CompleteMission.class);
-//            startActivity(i);
-//        });
 
-        GetTask();
+        if (InternetStatus.getInstance(getActivity()).isOnline()) {
+            GetTask();
+        } else {
+            Snackbar.make(getView(), " غير متصل بالانترت حاليا ، الرجاء مراجعةالأنترنت " , Snackbar.LENGTH_LONG)
+                    .setAction("محاولة مرة اخري", v -> GetTask()).show();
+        }
 
         return rootView;
     }
 
     private void GetTask() {
-        //        viewDialog.showDialog();
+        viewDialog.showDialog();
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URLs.GetTask + StudentId , response -> {
             try {
@@ -71,40 +76,44 @@ public class StudentMission extends Fragment implements MissionsAdapter.TaskAdap
                     int Id = TaskObject.getInt("IdTask");
                     String TaskName = TaskObject.getString("TaskName");
                     String TaskDec = TaskObject.getString("TaskDec");
+                    String Teacher = TaskObject.getString("Teacher");
+                    String Student = TaskObject.getString("Student");
+                    int TaskStatus = TaskObject.getInt("TaskStatus");
                     String CreatedAt = TaskObject.getString("CreatedAt");
-                    Task listItem = new Task(Id,TaskName, TaskDec, CreatedAt);
+                    Task listItem = new Task(Id,TaskName, TaskDec, Teacher, Student,TaskStatus, CreatedAt);
                     listItems.add(listItem);
                 }
 
                 adapter.notifyDataSetChanged();
-//                viewDialog.hideDialog();
+                viewDialog.hideDialog();
                 Log.d("res", jsonArray.toString());
 
             } catch (JSONException e) {
                 e.printStackTrace();
-//                viewDialog.hideDialog();
-                Snackbar.make(getView(), "Couldn't get Students " + e , Snackbar.LENGTH_LONG)
-                        .setAction("Retry", v -> GetTask()).show();
+                viewDialog.hideDialog();
+                Snackbar.make(getView(), " فشل عرض المهات  " + e , Snackbar.LENGTH_LONG)
+                        .setAction(" محاولة مرة اخري", v -> GetTask()).show();
             }
 
         }, error -> {
             error.printStackTrace();
-//            viewDialog.hideDialog();
-            Snackbar.make(getView(),"Couldn't get Students " + error , Snackbar.LENGTH_LONG)
-                    .setAction("Retry", v -> GetTask()).show();
+            viewDialog.hideDialog();
+            Snackbar.make(getView()," فشل عرض المهات " + error , Snackbar.LENGTH_LONG)
+                    .setAction(" محاولة مرة اخري", v -> GetTask()).show();
         });
 
         requestQueue.add(stringRequest);
 
     }
 
-    @Override
-    public void onTaskSelected(Task task) {
-        Intent intent = new Intent(getActivity(), CompleteMission.class);
-        intent.putExtra("TaskId", task.getId());
-        intent.putExtra("TaskName", task.getTaskName());
-        intent.putExtra("TaskDec", task.getTaskDec());
-        startActivity(intent);
-
-    }
+//    @Override
+//    public void onTaskSelected(Task task) {
+//        Log.d("tasK Id","" + task.getId());
+//        Intent intent = new Intent(getActivity(), CompleteMission.class);
+//        intent.putExtra("TaskId", task.getId());
+//        intent.putExtra("TaskName", task.getTaskName());
+//        intent.putExtra("TaskDec", task.getTaskDec());
+//        startActivity(intent);
+//
+//    }
 }

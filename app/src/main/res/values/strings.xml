@@ -19,7 +19,28 @@
     <string name="enter">تسجيل الدخول</string>
     <string name="login">تسجيل الدخول</string>
     <string name="splash_text">مركز الإتقان لتحفيظ القرآن</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="back_to_your_dashbaord"> في مركز الاتقان لتحفيظ القران</string>
+    <string name="students">الدارسين</string>
+    <string name="teacher">الشيوخ</string>
+    <string name="review_student">مراجعات الدارسين</string>
+    <string name="tasks_students">مهام الدارسين</string>
+    <string name="teacherPhoneNumber">0912836780</string>
+    <string name="teacherName">Ahmed K Madani</string>
+    <string name="teacherAddress">Khartoum - Sudan</string>
+    <string name="createdDate">Now</string>
+    <string name="add_teacher_name">اسم الشيخ</string>
+    <string name="add_teacher_address">السكن</string>
+    <string name="add_teacher_phone">الهاتف</string>
+    <string name="add_teacher_password">كلمة السر</string>
+    <string name="add_teacher">اضافة شيخ</string>
+    <string name="eduction_level">مستوى الدراسي</string>
+    <string name="student_name">اسم الدارس</string>
+    <string name="add_student">اضافة دارس</string>
+    <string name="workplace">مكان العمل</string>
+    <string name="student_pasword">كلمة السر</string>
+    <string name="student_phonenumber">الهاتف</string>
+    <string name="pick_teacher">اختر الشيخ :</string>
+    <string name="student_address">السكن</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="student_missions">Student Missions</string>
 

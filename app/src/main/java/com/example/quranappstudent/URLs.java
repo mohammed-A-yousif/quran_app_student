@@ -7,7 +7,7 @@ public class URLs {
 //    public  static String BaseUrl = "https://aletgan-api-dev.herokuapp.com/";
 
     public static String Login = BaseUrl + "student_login/";
-
+    public static String AddReview = BaseUrl + "add_review/";
     public static String GetTask = BaseUrl + "tasks_student/";
     public static String ChangeTaskStatus = BaseUrl + "edit_task/";
 

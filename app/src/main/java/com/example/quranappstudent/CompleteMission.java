@@ -13,6 +13,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.quranappstudent.activity.DashboardActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
@@ -82,7 +83,7 @@ public class CompleteMission extends AppCompatActivity  {
 //        viewDialog.hideDialog();
         Snackbar.make(findViewById(android.R.id.content), "Sign in Successfully", Snackbar.LENGTH_LONG)
                 .show();
-        startActivity(new Intent(this, ControlStudent.class));
+        startActivity(new Intent(this, DashboardActivity.class));
         finish();
     }
 
