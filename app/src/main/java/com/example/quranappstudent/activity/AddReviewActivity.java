@@ -77,8 +77,8 @@ public class AddReviewActivity extends AppCompatActivity {
             Button btn_Submit = dialogView.findViewById(R.id.btn_Submit);
             Button btn_dismiss = dialogView.findViewById(R.id.btn_dismiss);
 
-            ReivewDecText = dialogView.findViewById(R.id.input_review);
-            NumberOfPartsText = dialogView.findViewById(R.id.input_JuzzNum);
+            ReivewDecText = dialogView.findViewById(R.id.input_text_review);
+            NumberOfPartsText = dialogView.findViewById(R.id.juzzNum);
 
             btn_dismiss.setOnClickListener(view -> dialogBuilder.dismiss());
 
