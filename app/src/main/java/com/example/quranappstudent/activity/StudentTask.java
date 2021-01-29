@@ -1,11 +1,13 @@
 package com.example.quranappstudent.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,9 +39,10 @@ public class StudentTask extends Fragment {
 
     private TaskAdapter adapter;
     int StudentId;
-    List<Task> listItems ;
+    ArrayList<Task> listItems ;
     private JSONArray jsonArray;
     ViewDialog viewDialog;
+
 
     @Nullable
     @Override
@@ -56,8 +59,18 @@ public class StudentTask extends Fragment {
 
         viewDialog = new ViewDialog(getActivity());
 
-        adapter = new TaskAdapter(listItems, getActivity());
+        adapter = new TaskAdapter(listItems);
         recyclerView.setAdapter(adapter);
+
+
+        adapter.setOnItemClickListener(new TaskAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+                Toast.makeText(getActivity(),"View Yr Dialog Now ^_*",Toast.LENGTH_SHORT).show();
+                //              ################
+            }
+        });
 
 
         if (InternetStatus.getInstance(getActivity()).isOnline()) {

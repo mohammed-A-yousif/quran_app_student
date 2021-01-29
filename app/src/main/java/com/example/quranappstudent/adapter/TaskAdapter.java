@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,10 +24,61 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> implements Filterable {
-    private List<Task> listItems;
-    private List<Task> listItemsFiltered;
+    private ArrayList<Task> listItems;
+    private ArrayList<Task> listItemsFiltered;
 
-    public TaskAdapter(List<Task> listItems, Context context) {
+
+
+
+//  New @@@@@@@@@
+
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
+
+//  End of New ########
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        //        public TextView textStudentName;
+        public TextView textteacherName;
+        public TextView textTaskName;
+        public TextView textViewDate;
+        public LinearLayout task_layout;
+
+        public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+            super(itemView);
+//            textStudentName = itemView.findViewById(R.id.textStudentName);
+            textteacherName = itemView.findViewById(R.id.textteacherName);
+            textTaskName = itemView.findViewById(R.id.textTaskName);
+            textViewDate = itemView.findViewById(R.id.timestamp);
+            task_layout = itemView.findViewById(R.id.task_layout);
+
+            //            new
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
+//            end of new
+        }
+    }
+
+
+    public TaskAdapter(ArrayList<Task> listItems) {
         this.listItems = listItems;
         listItemsFiltered = new ArrayList<>(listItems);
 
@@ -36,7 +88,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> im
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_task, parent, false);
-        return new ViewHolder(v);
+        return new ViewHolder(v, mListener);
     }
 
     @Override
@@ -61,22 +113,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> im
         return contactFilter;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-//        public TextView textStudentName;
-        public TextView textteacherName;
-        public TextView textTaskName;
-        public TextView textViewDate;
-        public RelativeLayout task_layout;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-//            textStudentName = itemView.findViewById(R.id.textStudentName);
-            textteacherName = itemView.findViewById(R.id.textteacherName);
-            textTaskName = itemView.findViewById(R.id.textTaskName);
-            textViewDate = itemView.findViewById(R.id.timestamp);
-            task_layout = itemView.findViewById(R.id.task_layout);
-        }
-    }
     private Filter contactFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
