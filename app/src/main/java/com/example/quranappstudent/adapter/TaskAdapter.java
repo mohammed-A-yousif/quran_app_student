@@ -99,7 +99,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> im
         holder.textTaskName.setText("عنوان المهمة : " + listItem.getTaskName());
         holder.textViewDate.setText(listItem.getCreatedAt());
         if(listItem.getTaskStatus() != 1){
-            holder.task_layout.setBackgroundColor(Color.parseColor("#FE7171"));
+//            holder.task_layout.setBackgroundColor(Color.parseColor("#FE7171"));
+            holder.task_layout.setBackgroundResource(R.drawable.red_corner_layout);
         }
     }
 
