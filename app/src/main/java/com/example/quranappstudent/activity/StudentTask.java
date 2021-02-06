@@ -88,7 +88,7 @@ public class StudentTask extends Fragment {
                 mDialogNo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getActivity(),"انجزي الشغله دي سرعه ^_^" ,Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"@_@" ,Toast.LENGTH_LONG).show();
                         dialogBuilder.dismiss();
                     }
                 });
@@ -97,7 +97,7 @@ public class StudentTask extends Fragment {
                 mDialogOk.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getActivity(),"فااااالحه ^_^" ,Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"^_^" ,Toast.LENGTH_LONG).show();
                         dialogBuilder.cancel();
                     }
                 });
