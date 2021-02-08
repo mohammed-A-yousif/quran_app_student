@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.quranappstudent.InternetStatus;
@@ -45,7 +46,8 @@ public class StudentTask extends Fragment {
     ArrayList<Task> listItems ;
     private JSONArray jsonArray;
     ViewDialog viewDialog;
-
+    int TaskId;
+    int TaskStatus;
 
     @Nullable
     @Override
@@ -66,45 +68,43 @@ public class StudentTask extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-        adapter.setOnItemClickListener(new TaskAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Task mission = listItems.get(position);
-                String title = mission.getTaskName();
+        adapter.setOnItemClickListener(position -> {
+            Task mission = listItems.get(position);
+            String title = mission.getTaskName();
+            TaskId = mission.getId();
+            TaskStatus = mission.getTaskStatus();
 
-//                Toast.makeText(getActivity(),"View Yr Dialog Now ^_*",Toast.LENGTH_SHORT).show();
-                //              ################
+            final AlertDialog dialogBuilder = new AlertDialog.Builder(getActivity()).create();
+            LayoutInflater inflater1 = getActivity().getLayoutInflater();
 
-                final AlertDialog dialogBuilder = new AlertDialog.Builder(getActivity()).create();
-                LayoutInflater inflater1 = getActivity().getLayoutInflater();
+            View dialogView = inflater1.inflate(R.layout.task_dialog, null);
+            TextView titleTaskTextView= dialogView.findViewById(R.id.task_dialog_tv);
+            titleTaskTextView.setText(title);
 
-                View dialogView = inflater1.inflate(R.layout.task_dialog, null);
-                TextView titleTaskTextView= dialogView.findViewById(R.id.task_dialog_tv);
-                titleTaskTextView.setText(title);
+            dialogBuilder.setView(dialogView);
 
-                dialogBuilder.setView(dialogView);
+            FrameLayout mDialogNo = dialogView.findViewById(R.id.frmNo);
+            mDialogNo.setOnClickListener(v -> {
+                Toast.makeText(getActivity(),"@_@" ,Toast.LENGTH_LONG).show();
+                dialogBuilder.dismiss();
+            });
 
-                FrameLayout mDialogNo = dialogView.findViewById(R.id.frmNo);
-                mDialogNo.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getActivity(),"@_@" ,Toast.LENGTH_LONG).show();
-                        dialogBuilder.dismiss();
-                    }
-                });
+            FrameLayout mDialogOk = dialogView.findViewById(R.id.frmOk);
+            mDialogOk.setOnClickListener(v -> {
+                Toast.makeText(getActivity(),"^_^" ,Toast.LENGTH_LONG).show();
+                if(TaskStatus != 1){
+                ChangeTask(TaskId);
+                    dialogBuilder.dismiss();
 
-                FrameLayout mDialogOk = dialogView.findViewById(R.id.frmOk);
-                mDialogOk.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getActivity(),"^_^" ,Toast.LENGTH_LONG).show();
-                        dialogBuilder.cancel();
-                    }
-                });
+                }
+                else { Toast.makeText(getActivity()," تم اتمام هذه المهمة مسبقا" ,Toast.LENGTH_LONG).show();
+                    dialogBuilder.dismiss();
+
+                }
+            });
 
 
-                dialogBuilder.show();
-            }
+            dialogBuilder.show();
         });
 
 
@@ -159,14 +159,40 @@ public class StudentTask extends Fragment {
 
     }
 
-//    @Override
-//    public void onTaskSelected(Task task) {
-//        Log.d("tasK Id","" + task.getId());
-//        Intent intent = new Intent(getActivity(), CompleteMission.class);
-//        intent.putExtra("TaskId", task.getId());
-//        intent.putExtra("TaskName", task.getTaskName());
-//        intent.putExtra("TaskDec", task.getTaskDec());
-//        startActivity(intent);
-//
-//    }
+    private void ChangeTask(int taskId) {
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                URLs.ChangeTaskStatus + taskId + "?TaskStatus=" + 1,
+                null, (JSONObject response) -> {
+            try {
+
+                int TaskId = response.getInt("TaskStatus");
+                Log.d("Task Id", "" + TaskId);
+                onTaskChange();
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                onTaskFailed();
+            }
+
+            Log.d("String Response : ", "" + response.toString());
+
+        }, error -> Log.d("Error getting response", "" + error));
+
+        requestQueue.add(jsonObjectRequest);
+        Log.d("rs", "" + jsonObjectRequest);
+
+    }
+
+    private void onTaskFailed() {
+        Snackbar.make(getView()," فشل اتمام المهمة "  , Snackbar.LENGTH_LONG)
+                .show();
+    }
+
+    private void  onTaskChange(){
+        Snackbar.make(getView(),"تم اتمام المهمة بنجاح "  , Snackbar.LENGTH_LONG)
+                .show();
+        GetTask();
+    }
+
 }

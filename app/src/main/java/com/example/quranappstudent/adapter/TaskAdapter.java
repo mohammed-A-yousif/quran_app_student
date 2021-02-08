@@ -27,11 +27,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> im
     private ArrayList<Task> listItems;
     private ArrayList<Task> listItemsFiltered;
 
-
-
-
-//  New @@@@@@@@@
-
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
@@ -43,11 +38,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> im
     }
 
 
-//  End of New ########
-
-
     public class ViewHolder extends RecyclerView.ViewHolder {
-        //        public TextView textStudentName;
         public TextView textteacherName;
         public TextView textTaskName;
         public TextView textViewDate;
@@ -55,25 +46,19 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> im
 
         public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
-//            textStudentName = itemView.findViewById(R.id.textStudentName);
             textteacherName = itemView.findViewById(R.id.textteacherName);
             textTaskName = itemView.findViewById(R.id.textTaskName);
             textViewDate = itemView.findViewById(R.id.timestamp);
             task_layout = itemView.findViewById(R.id.task_layout);
 
-            //            new
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(position);
                     }
                 }
             });
-//            end of new
         }
     }
 
@@ -94,12 +79,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> im
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Task listItem = listItems.get(position);
-//        holder.textStudentName.setText("اسم الدارس : " + listItem.getStudent());
         holder.textteacherName.setText("اسم الشيخ : " + listItem.getTeacher());
         holder.textTaskName.setText("عنوان المهمة : " + listItem.getTaskName());
         holder.textViewDate.setText(listItem.getCreatedAt());
         if(listItem.getTaskStatus() != 1){
-//            holder.task_layout.setBackgroundColor(Color.parseColor("#FE7171"));
             holder.task_layout.setBackgroundResource(R.drawable.red_corner_layout);
         }
     }
